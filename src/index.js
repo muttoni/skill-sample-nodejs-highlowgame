@@ -34,7 +34,7 @@ var newSessionHandlers = {
     },
     'SessionEndedRequest': function () {
         console.log('session ended!');
-        //this.attributes['endedSessionCount'] += 1;
+        this.emit(':saveState', false);
         this.emit(":tell", "Goodbye!");
     },
     'Unhandled': function() {
@@ -71,6 +71,7 @@ var startGameHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
     'SessionEndedRequest': function () {
         console.log("SESSIONENDEDREQUEST");
         //this.attributes['endedSessionCount'] += 1;
+        this.emit(':saveState', false);
         this.emit(':tell', "Goodbye!");
     },
     'Unhandled': function() {
@@ -118,6 +119,7 @@ var guessModeHandlers = Alexa.CreateStateHandler(states.GUESSMODE, {
     'SessionEndedRequest': function () {
         console.log("SESSIONENDEDREQUEST");
         this.attributes['endedSessionCount'] += 1;
+        this.emit(':saveState', false);
         this.emit(':tell', "Goodbye!");
     },
     'Unhandled': function() {
